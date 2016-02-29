@@ -44,7 +44,7 @@ public class VoxelBase : Voxel {
 
   void loadConfiguration() {
 
-    freePositions = VoxelConfigurations.myFirstConfiguration;
+    freePositions = VoxelConfigurations.newConfig;
     StartCoroutine(assembleVoxels());
 
   }
@@ -55,7 +55,8 @@ public class VoxelBase : Voxel {
 
       Voxel newVoxel = VoxelController.activeController.GetFreeVoxel();
      
-     Debug.Log("HERE");
+      Debug.Log("HERE"); 
+      newVoxel.transform.parent = this.transform;
       newVoxel.MoveTo(getFreePosition());
       voxels.Add(newVoxel);
 

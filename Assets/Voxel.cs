@@ -39,7 +39,7 @@ public class Voxel : MonoBehaviour {
 
     while (Time.time - recordedTime < moveDuration) {
 
-      this.transform.position = Vector3.Lerp(startPosition, destination, (Time.time - recordedTime) / moveDuration);
+      this.transform.localPosition = Vector3.Lerp(startPosition, destination, (Time.time - recordedTime) / moveDuration);
 
       yield return null;
 

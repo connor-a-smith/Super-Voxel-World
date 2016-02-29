@@ -5,12 +5,17 @@ using System.Collections.Generic;
 public class VoxelConfigurations : MonoBehaviour {
 
   public bool addConfigMode = false;
+  public GameObject baseForConfig;
 
   public static List<Vector3> myFirstConfiguration;
+  public static List<Vector3> newConfig;
 
   void Awake() {
 
+
     myFirstConfiguration = new List<Vector3>();
+    newConfig = new List<Vector3>();
+    makeConfiguration();
     Debug.Log("INSIDE: " + myFirstConfiguration);
 
 
@@ -36,4 +41,14 @@ public class VoxelConfigurations : MonoBehaviour {
 	void Update () {
 	
 	}
+
+  void makeConfiguration() {
+
+    foreach (Transform child in baseForConfig.GetComponentsInChildren<Transform>()) {
+
+      newConfig.Add(child.transform.localPosition);
+
+
+    }
+  }
 }

@@ -17,7 +17,6 @@ public class VoxelController : MonoBehaviour {
 
     for (int i = 0; i < 50; i++) {
 
-      SpawnVoxel();
 
     }
 
@@ -50,7 +49,6 @@ public class VoxelController : MonoBehaviour {
   public void RemoveFreeVoxel(int freeVoxelIndex) {
 
     freeVoxels.RemoveAt(freeVoxelIndex);
-    SpawnVoxel();
 
   }
 
@@ -76,7 +74,11 @@ public class VoxelController : MonoBehaviour {
 
   public Voxel GetFreeVoxel() {
 
-    Debug.Log("COUNT: " + freeVoxels.Count);
+    if (freeVoxels.Count <= 0) {
+
+      SpawnVoxel();
+
+    }
 
     int randomVoxelIndex = Random.Range(0, freeVoxels.Count-1);
 
