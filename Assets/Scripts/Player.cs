@@ -5,11 +5,16 @@ public class Player : MonoBehaviour {
 
   public static Player currentPlayer;
 
+  void Awake() {
+
+    currentPlayer = this;
+
+  }
+
 	// Use this for initialization
 	void Start () {
 
-    currentPlayer = this;
-	
+
 	}
 	
 	// Update is called once per frame

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class VoxelController : MonoBehaviour {
 
   public Object voxel;
+  public float spawnSphereRadius = 5;
 
   public static VoxelController activeController;
 
@@ -15,8 +16,9 @@ public class VoxelController : MonoBehaviour {
     freeVoxels = new List<Voxel>();
     VoxelController.activeController = this;
 
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 20000; i++) {
 
+      SpawnVoxel();
 
     }
 
@@ -55,18 +57,35 @@ public class VoxelController : MonoBehaviour {
   Vector3 GetValidVoxelLocation() {
 
     //temporary
-    return new Vector3(Random.Range(-5f, 5f),
-                       Random.Range(-5f, 5f),
-                       Random.Range(-5f, 5f)); 
+    //return this.transform.position + new Vector3(Random.Range(-5f, 5f),
+      //                 Random.Range(-5f, 5f),
+        //               5); 
+
+    float theta = 0, phi = 0;
+
+      theta = 2*Mathf.PI*Random.Range(0f, 1f);
+      phi = Mathf.Acos((2f * Random.Range(0f, 1f)) - 1f);
+
+      Vector3 sphereCoords = new Vector3(
+        Mathf.Cos(theta) * Mathf.Sin(phi),
+        Mathf.Sin(theta) * Mathf.Sin(phi),
+        Mathf.Cos(phi));
+
+      sphereCoords *= spawnSphereRadius;
+      sphereCoords += Player.currentPlayer.transform.position;
+
+      return sphereCoords;
 
   }
 
-  void SpawnVoxel() {
+  Voxel SpawnVoxel() {
 
     GameObject newVoxel = 
       (GameObject)GameObject.Instantiate(voxel, GetValidVoxelLocation(), Quaternion.identity);
 
     freeVoxels.Add(newVoxel.GetComponent<Voxel>());
+
+    return newVoxel.GetComponent<Voxel>();
 
 
   }
