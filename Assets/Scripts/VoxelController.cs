@@ -15,20 +15,18 @@ public class VoxelController : MonoBehaviour {
 
     freeVoxels = new List<Voxel>();
     VoxelController.activeController = this;
-
-    for (int i = 0; i < 5000; i++) {
-
-      SpawnVoxel();
-
-    }
+   
 
   }
 
 	// Use this for initialization
 	void Start () {
 
- 
-	
+    for (int i = 0; i < 5000; i++) {
+
+      SpawnVoxel();
+
+    }
 	}
 	
 	// Update is called once per frame
