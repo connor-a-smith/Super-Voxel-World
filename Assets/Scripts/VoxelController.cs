@@ -16,7 +16,7 @@ public class VoxelController : MonoBehaviour {
     freeVoxels = new List<Voxel>();
     VoxelController.activeController = this;
 
-    for (int i = 0; i < 20000; i++) {
+    for (int i = 0; i < 5000; i++) {
 
       SpawnVoxel();
 
