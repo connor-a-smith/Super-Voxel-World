@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class VoxelBase : Voxel {
 
+
+  public float grabDelay = 0.1f;
+  public int grabAmount = 20;
+
   //list of voxels that are part of this base
   private List<Voxel> voxels;
 
@@ -20,7 +24,6 @@ public class VoxelBase : Voxel {
 	void Start () {
 
     this.freePositions = new List<Vector3>();
-    Debug.Log(freePositions);
     loadConfiguration();
 	
 	}
@@ -34,6 +37,7 @@ public class VoxelBase : Voxel {
   public Vector3 getFreePosition() {
 
     int randomIndex = Random.Range(0, freePositions.Count-1);
+    Debug.Log("INDEX: " + randomIndex + " AND SIZE: " + freePositions.Count);
     Vector3 freePosition = (Vector3)freePositions[randomIndex];
     freePositions.RemoveAt(randomIndex);
 
@@ -44,7 +48,7 @@ public class VoxelBase : Voxel {
 
   void loadConfiguration() {
 
-    freePositions = VoxelConfigurations.newConfig;
+    freePositions = VoxelConfigurations.cube;
     StartCoroutine(assembleVoxels());
 
   }
@@ -53,14 +57,16 @@ public class VoxelBase : Voxel {
 
     while (freePositions.Count > 0) {
 
-      Voxel newVoxel = VoxelController.activeController.GetFreeVoxel();
+        Voxel newVoxel = VoxelController.activeController.GetFreeVoxel();
      
-      Debug.Log("HERE"); 
-      newVoxel.transform.parent = this.transform;
-      newVoxel.MoveTo(getFreePosition());
-      voxels.Add(newVoxel);
+        newVoxel.transform.parent = this.transform;
+        newVoxel.MoveTo(getFreePosition()); 
+        voxels.Add(newVoxel);
 
-      yield return null;
+        Debug.Log("FREE POSITIONS: " + freePositions.Count);
+
+
+      yield return new WaitForSeconds(grabDelay);
 
     }
   }

@@ -27,6 +27,7 @@ public class VoxelController : MonoBehaviour {
       SpawnVoxel();
 
     }
+
 	}
 	
 	// Update is called once per frame
